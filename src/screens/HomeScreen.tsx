@@ -2,10 +2,6 @@ import React from 'react';
 import {ActivityIndicator, Text, View} from 'react-native';
 import {useMovies} from '../hooks/useMovies';
 
-export type RootStackParamList = {
-  MovieScreen: {id: string};
-};
-
 export const HomeScreen = () => {
   const {moviesNowPlaying, isLoading} = useMovies();
 
