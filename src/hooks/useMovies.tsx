@@ -6,16 +6,16 @@ export const useMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [moviesNowPlaying, setMoviesNowPlaying] = useState<Movie[]>([]);
 
+  useEffect(() => {
+    getMovies();
+  }, []);
+
   const getMovies = async () => {
     const {data} = await movieDB.get<MovieDBNowPlaying>('/now_playing');
 
     setMoviesNowPlaying(data.results);
     setIsLoading(false);
   };
-
-  useEffect(() => {
-    getMovies();
-  }, []);
 
   return {
     moviesNowPlaying,
