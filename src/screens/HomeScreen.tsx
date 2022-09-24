@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
 import movieDB from '../api/movieDB';
+import {MovieDBNowPlaying} from '../interfaces/movieInterface';
 
 export type RootStackParamList = {
   MovieScreen: {id: string};
@@ -12,7 +13,7 @@ export const HomeScreen = () => {
   }, []);
 
   const getData = async (url: string) => {
-    const {data} = await movieDB.get(url);
+    const {data} = await movieDB.get<MovieDBNowPlaying>(url);
 
     console.log(data);
   };
