@@ -1,25 +1,25 @@
-import React, {useEffect} from 'react';
-import {Text, View} from 'react-native';
-import movieDB from '../api/movieDB';
-import {MovieDBNowPlaying} from '../interfaces/movieInterface';
+import React from 'react';
+import {ActivityIndicator, Text, View} from 'react-native';
+import {useMovies} from '../hooks/useMovies';
 
 export type RootStackParamList = {
   MovieScreen: {id: string};
 };
 
 export const HomeScreen = () => {
-  useEffect(() => {
-    getData('/now_playing');
-  }, []);
+  const {moviesNowPlaying, isLoading} = useMovies();
 
-  const getData = async (url: string) => {
-    const {data} = await movieDB.get<MovieDBNowPlaying>(url);
-
-    console.log(data);
-  };
+  if (isLoading) {
+    return (
+      <View>
+        <ActivityIndicator color="red" size={100} />
+      </View>
+    );
+  }
   return (
     <View>
       <Text>HomeScreen</Text>
+      <Text>{moviesNowPlaying[0].title}</Text>
     </View>
   );
 };
