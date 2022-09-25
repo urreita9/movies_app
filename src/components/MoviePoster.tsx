@@ -1,7 +1,7 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
 import {Movie} from '../interfaces/movieInterface';
-// import {REACT_APP_IMAGE_URL} from '@env';
 
 interface Props {
   movie: Movie;
@@ -12,17 +12,26 @@ interface Props {
 export const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
+  const navigation = useNavigation();
+
+  const handleNavigation = () => {
+    navigation.navigate('MovieScreen', {movie});
+  };
   return (
-    <View
+    <TouchableOpacity
       style={{
         width,
         height,
-        marginHorizontal: 8,
-      }}>
+        marginHorizontal: 2,
+        paddingBottom: 20,
+        paddingHorizontal: 7,
+      }}
+      activeOpacity={0.8}
+      onPress={handleNavigation}>
       <View style={styles.imageContainer}>
         <Image source={{uri}} style={styles.image} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
