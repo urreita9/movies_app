@@ -1,7 +1,14 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, View, Dimensions} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
+import {HorizontalSlider} from '../components/HorizontalSlider';
 import {MoviePoster} from '../components/MoviePoster';
 import {useMovies} from '../hooks/useMovies';
 
@@ -19,16 +26,22 @@ export const HomeScreen = () => {
     );
   }
   return (
-    <View style={{marginTop: top + 20}}>
-      <View style={{height: 440}}>
-        <Carousel
-          data={moviesNowPlaying}
-          renderItem={({item}: any) => <MoviePoster movie={item} />}
-          sliderWidth={windowWidth}
-          itemWidth={300}
-        />
+    <ScrollView>
+      <View style={{marginTop: top + 20}}>
+        <View style={styles.bigCarousel}>
+          <Carousel
+            data={moviesNowPlaying}
+            renderItem={({item}: any) => <MoviePoster movie={item} />}
+            sliderWidth={windowWidth}
+            itemWidth={300}
+            inactiveSlideOpacity={0.9}
+          />
+        </View>
+
+        <HorizontalSlider title="Now Playing" movies={moviesNowPlaying} />
+        <HorizontalSlider title="Now Playing" movies={moviesNowPlaying} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -37,5 +50,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  bigCarousel: {
+    height: 440,
   },
 });
