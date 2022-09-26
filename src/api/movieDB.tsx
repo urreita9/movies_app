@@ -10,14 +10,4 @@ const movieDB = axios.create({
   },
 });
 
-movieDB.interceptors.request.use(request => {
-  console.log('Starting Request', request);
-  return request;
-});
-
-movieDB.interceptors.response.use(response => {
-  console.log('Response:', response);
-  return response;
-});
-
 export default movieDB;
