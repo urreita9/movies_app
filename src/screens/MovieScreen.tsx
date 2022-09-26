@@ -7,22 +7,25 @@ import {
   ScrollView,
   Text,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {RootStackParams} from '../navigation/Navigation';
 import {useMovieDetails} from '../hooks/useMovieDetails';
 import {MovieDetails} from '../components/MovieDetails';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const screenHeight = Dimensions.get('screen').height;
 
 interface Props extends StackScreenProps<RootStackParams, 'MovieScreen'> {}
 
-export const MovieScreen = ({route}: Props) => {
+export const MovieScreen = ({route, navigation}: Props) => {
   const {movie} = route.params;
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const {isLoading, cast, movieFull} = useMovieDetails(movie.id);
-  console.log(movie);
+  const handleNavigation = () => {
+    navigation.pop();
+  };
   return (
     <ScrollView>
       <View style={styles.imageContainer}>
@@ -34,17 +37,16 @@ export const MovieScreen = ({route}: Props) => {
         <Text style={styles.title}>{movie.original_title}</Text>
         <Text style={styles.subtitle}>{movie.title}</Text>
       </View>
-      <View style={styles.titleContainer}>
-        {isLoading ? (
-          <ActivityIndicator
-            size={30}
-            color="#282c34"
-            style={{marginTop: 20}}
-          />
-        ) : (
-          <MovieDetails />
-        )}
-      </View>
+
+      {isLoading ? (
+        <ActivityIndicator size={30} color="#282c34" style={{marginTop: 20}} />
+      ) : (
+        <MovieDetails cast={cast} movieFull={movieFull!} />
+      )}
+
+      <TouchableOpacity style={styles.backButton} onPress={handleNavigation}>
+        <Icon color="white" name="arrow-back-outline" size={60} />
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -83,4 +85,11 @@ const styles = StyleSheet.create({
     color: '#282c34',
   },
   title: {fontSize: 20, fontWeight: 'bold', color: '#282c34'},
+  backButton: {
+    position: 'absolute',
+    zIndex: 999,
+    elevation: 9,
+    top: 30,
+    left: 5,
+  },
 });
