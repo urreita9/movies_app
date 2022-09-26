@@ -26,9 +26,7 @@ export const HomeScreen = () => {
     );
   }
   return (
-    <ScrollView
-    // style={{backgroundColor: '#202124'}}
-    >
+    <ScrollView style={{backgroundColor: '#202124'}}>
       <View style={{marginTop: top + 20}}>
         <View style={styles.bigCarousel}>
           <Carousel

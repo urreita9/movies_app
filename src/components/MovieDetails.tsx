@@ -50,18 +50,18 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     opacity: 0.8,
-    color: '#282c34',
+    color: '#aec1c6',
     marginLeft: 5,
   },
   summary: {
     fontSize: 20,
     opacity: 0.8,
-    color: '#282c34',
+    color: '#aec1c6',
     fontWeight: 'bold',
   },
   overview: {
     fontSize: 16,
     opacity: 0.8,
-    color: '#282c34',
+    color: '#aec1c6',
   },
 });

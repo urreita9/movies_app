@@ -27,7 +27,7 @@ export const MovieScreen = ({route, navigation}: Props) => {
     navigation.pop();
   };
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor: '#202124'}}>
       <View style={styles.imageContainer}>
         <View style={styles.imageBorder}>
           <Image source={{uri}} style={styles.posterImage} />
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     opacity: 0.8,
-    color: '#282c34',
+    color: '#aec1c6',
   },
-  title: {fontSize: 20, fontWeight: 'bold', color: '#282c34'},
+  title: {fontSize: 20, fontWeight: 'bold', color: '#aec1c6'},
   backButton: {
     position: 'absolute',
     zIndex: 999,
