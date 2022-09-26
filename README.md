@@ -11,6 +11,7 @@ Build a simple React Native App where we:
 ## Challenge coming...
 - change the screen background-color based on the Movie poster
 
+[5a539840-6753-4344-b51d-e592cfd1fde5.webm](https://user-images.githubusercontent.com/71611977/192277891-31c802d5-5d70-40a7-9384-fa6d9c1a515d.webm)
 
 ![Screenshot_1664194580](https://user-images.githubusercontent.com/71611977/192276976-4b199957-c22f-4bed-a7a4-08ebe5bce5b6.png)
 ![Screenshot_1664194587](https://user-images.githubusercontent.com/71611977/192276991-1a08060c-2758-4ca3-8043-e385ea14d24d.png)
