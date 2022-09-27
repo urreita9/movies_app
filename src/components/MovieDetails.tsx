@@ -10,11 +10,12 @@ interface Props {
   movieFull: MovieFull;
 }
 export const MovieDetails = ({cast, movieFull}: Props) => {
+  const renderItem = ({item}) => <CastItem actor={item} />;
   return (
     <>
       <View style={{marginHorizontal: 20}}>
         <View style={{flexDirection: 'row'}}>
-          <Icon name="star-outline" color="#282c34" size={16} />
+          <Icon name="star" color="#282c34" size={16} />
 
           <Text style={styles.description}>{movieFull.vote_average}</Text>
           <Text style={styles.description}>
@@ -36,7 +37,7 @@ export const MovieDetails = ({cast, movieFull}: Props) => {
         <FlatList
           data={cast}
           keyExtractor={item => item.id.toString()}
-          renderItem={({item}) => <CastItem actor={item} />}
+          renderItem={renderItem}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           style={{marginTop: 10, height: 70}}
