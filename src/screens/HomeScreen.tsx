@@ -8,16 +8,25 @@ import {
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
+import ImageColors from 'react-native-image-colors';
 import {GradientBackground} from '../components/GradientBackground';
 import {HorizontalSlider} from '../components/HorizontalSlider';
 import {MoviePoster} from '../components/MoviePoster';
 import {useMovies} from '../hooks/useMovies';
+import {getColors} from '../helpers/getColors';
 
 const {width: windowWidth} = Dimensions.get('window');
 
 export const HomeScreen = () => {
   const {nowPlaying, popular, topRated, upcoming, isLoading} = useMovies();
   const {top} = useSafeAreaInsets();
+
+  const getPosterColors = async (index: number) => {
+    const movie = nowPlaying[index];
+    const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    const [primary, secondary] = await getColors(uri);
+    console.log(primary, secondary);
+  };
 
   if (isLoading) {
     return (
@@ -28,9 +37,7 @@ export const HomeScreen = () => {
   }
   return (
     <GradientBackground>
-      <ScrollView
-      // style={{backgroundColor: '#202124'}}
-      >
+      <ScrollView>
         <View style={{marginTop: top + 20}}>
           <View style={styles.bigCarousel}>
             <Carousel
@@ -39,6 +46,7 @@ export const HomeScreen = () => {
               sliderWidth={windowWidth}
               itemWidth={300}
               inactiveSlideOpacity={0.9}
+              onSnapToItem={index => getPosterColors(index)}
             />
           </View>
 
